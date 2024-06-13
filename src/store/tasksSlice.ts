@@ -13,6 +13,7 @@ export const taskSlice = createSlice({
         changeMode: (state) => {
             state.mode = "changeActiveTask"
         },
+
         chooseActiveTask: (state, action: PayloadAction<{ id: string }>) => {
             state.tasks.forEach((task) => {
                 task.active = false
@@ -29,11 +30,15 @@ export const taskSlice = createSlice({
                 active: false,
             }
             state.tasks = [...state.tasks, newTask]
+        },
+
+        removeTask: (state, action: PayloadAction<{ id: string }>) => {
+            state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
         }
     }
 });
 
 
-export const {changeMode, chooseActiveTask, addNewTask} = taskSlice.actions;
+export const {changeMode, chooseActiveTask, addNewTask, removeTask} = taskSlice.actions;
 export default taskSlice.reducer
 

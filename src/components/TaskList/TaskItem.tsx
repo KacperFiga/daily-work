@@ -5,7 +5,7 @@ import {MoreVert} from '@mui/icons-material';
 import {Edit} from '@mui/icons-material';
 import {styled} from '@mui/material/styles';
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {chooseActiveTask} from "../../store/tasksSlice"
+import {chooseActiveTask, removeTask} from "../../store/tasksSlice"
 
 interface TaskItemProps {
     name: string;
@@ -58,7 +58,7 @@ const TaskItem = ({name, id}: TaskItemProps) => {
                   onClose={handleCloseMenu}
             >
                 <MenuItem>
-                    <Button className="w-min">
+                    <Button className="w-min" onClick={() => dispatch(removeTask({id}))}>
                         <span className="capitalize mr-2"> Remove </span>
                         <Delete className="text-red-300 hover:text-red-500"/>
                     </Button>
