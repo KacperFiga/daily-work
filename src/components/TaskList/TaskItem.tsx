@@ -9,7 +9,7 @@ import {chooseActiveTask} from "../../store/tasksSlice"
 
 interface TaskItemProps {
     name: string;
-    id: number;
+    id: string;
 }
 
 const StyledListItem = styled(ListItem)(({theme}) => ({

@@ -5,9 +5,7 @@ import TaskItem from "./TaskItem";
 const TaskList = () => {
 
     const tasksStore = useAppSelector((store) => store.tasks)
-
-
-    const taskList = tasksStore.tasks.map((task: { id: number; title: string; }) => <TaskItem key={task.id} id={task.id}
+    const taskList = tasksStore.tasks.map((task: { id: string; title: string; }) => <TaskItem key={task.id} id={task.id}
                                                                                               name={task.title}/>)
 
     return (

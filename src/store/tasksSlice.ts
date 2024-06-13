@@ -1,23 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import generateId from "../utils/generateId";
+import {TaskI} from "../types/tasks"
 
-const initialState = {
-    tasks: [
-        {
-            title: "zadanie 0",
-            id: 0,
-            active: false,
-        },
-        {
-            title: "zadanie 1 ",
-            id: 1,
-            active: false,
-        }
-        , {
-            title: "zadanie 2",
-            id: 2,
-            active: false,
-        }
-    ],
+const initialState: { tasks: TaskI[], mode: string } = {
+    tasks: [],
     mode: "none"
 }
 export const taskSlice = createSlice({
@@ -27,17 +13,27 @@ export const taskSlice = createSlice({
         changeMode: (state) => {
             state.mode = "changeActiveTask"
         },
-        chooseActiveTask: (state, action: PayloadAction<{ id: number }>) => {
+        chooseActiveTask: (state, action: PayloadAction<{ id: string }>) => {
             state.tasks.forEach((task) => {
                 task.active = false
             })
-            state.tasks[action.payload.id].active = true
+            const elementIndex = state.tasks.findIndex(task => task.id === action.payload.id);
+            state.tasks[elementIndex].active = true
             state.mode = "none"
+        },
+
+        addNewTask: (state, action: PayloadAction<{ title: string }>) => {
+            const newTask = {
+                title: action.payload.title,
+                id: generateId(),
+                active: false,
+            }
+            state.tasks = [...state.tasks, newTask]
         }
     }
 });
 
 
-export const {changeMode, chooseActiveTask} = taskSlice.actions;
+export const {changeMode, chooseActiveTask, addNewTask} = taskSlice.actions;
 export default taskSlice.reducer
 
