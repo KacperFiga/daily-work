@@ -4,6 +4,8 @@ import {Delete} from "@mui/icons-material";
 import {MoreVert} from '@mui/icons-material';
 import {Edit} from '@mui/icons-material';
 import {styled} from '@mui/material/styles';
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {chooseActiveTask} from "../../store/tasksSlice"
 
 interface TaskItemProps {
     name: string;
@@ -17,6 +19,8 @@ const StyledListItem = styled(ListItem)(({theme}) => ({
 }));
 
 const TaskItem = ({name, id}: TaskItemProps) => {
+    const dispatch = useAppDispatch()
+    const mode = useAppSelector(state => state.tasks.mode);
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
@@ -37,13 +41,17 @@ const TaskItem = ({name, id}: TaskItemProps) => {
                 {name}
             </p>
 
-            <div>
-                <Checkbox className="p-0"/>
+            {mode !== "changeActiveTask" ? <div>
+                    <Checkbox className="p-0"/>
 
-                <Button className="m-0" aria-describedby={String(id)} onClick={handleOpenMenu}>
-                    <MoreVert/>
-                </Button>
-            </div>
+                    <Button className="m-0" aria-describedby={String(id)}
+                            onClick={handleOpenMenu}>
+                        <MoreVert/>
+                    </Button>
+                </div>
+                : <Button onClick={() => dispatch(chooseActiveTask({id}))}>
+                    Choose
+                </Button>}
 
             <Menu open={isPopoverOpen} id={String(id)}
                   anchorEl={anchorEl}
