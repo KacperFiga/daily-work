@@ -9,7 +9,7 @@ const TaskList = () => {
                                                                                               name={task.title}/>)
 
     return (
-        <List className="bg-neutral-100 mt-4 rounded">
+        <List className="bg-neutral-100 mt-4 rounded w-[300px] mx-auto">
             {taskList}
         </List>
     )

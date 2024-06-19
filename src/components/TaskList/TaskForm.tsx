@@ -61,7 +61,8 @@ const TaskForm = () => {
                 </Card>
             </Modal>
 
-            <Button variant="outlined" className="w-full mt-4 bg-gray-50" onClick={() => changeIsModalOpen(true)}>
+            <Button variant="outlined" className="mt-4 bg-gray-50 w-[300px] mx-auto block"
+                    onClick={() => changeIsModalOpen(true)}>
                 Add a new task
             </Button>
         </>
