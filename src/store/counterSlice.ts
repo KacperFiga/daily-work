@@ -31,8 +31,16 @@ export const counterSlice = createSlice({
         setIsCounterRunning: (state) => {
             state.isCounterRunning = !state.isCounterRunning;
         },
+        restartCounter: (state) => {
+            state.isCounterRunning = false;
+            if (state.isWorkMode) {
+                state.timer = state.config.base.workTime;
+            } else {
+                state.timer = state.config.base.shortBreakTime;
+            }
+        }
     }
 })
 
-export const {handleCounter, setIsCounterRunning} = counterSlice.actions;
+export const {handleCounter, setIsCounterRunning, restartCounter} = counterSlice.actions;
 export default counterSlice.reducer
