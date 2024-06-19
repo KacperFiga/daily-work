@@ -18,7 +18,7 @@ const ActiveTask = () => {
         <Box>
             {activeTask ? <p className="mb-2">You are currently working on: {activeTask.title} </p> : null}
 
-            <Button className="capitalize ml-auto block" variant="contained"
+            <Button className="capitalize ml-auto block" variant="contained" disabled={state.tasks.length === 0}
                     onClick={() => dispatch(changeMode())}> {activeTask ? 'Change task' : 'Choose task to work on'} </Button>
         </Box>
     )
