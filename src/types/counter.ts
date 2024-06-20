@@ -4,7 +4,15 @@ export interface counterObjectI {
             workTime: number;
             shortBreakTime: number;
             longBreakTime: number;
-        }
+        },
+        breaks: {
+            shortBreaksAfterLongBreak: number;
+        },
+    },
+    stats: {
+        pomodoroSessions: number;
+        shortBreakSessions: number;
+        longBreakSessions: number;
     },
     timer: number;
     isWorkMode: boolean;
